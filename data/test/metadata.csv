@@ -1,0 +1,28 @@
+strains,genomes,MLST-1,MLST-2,ZIP code,Location,date
+FG47,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,97400,Reunion - Saint Denis - Felix Guyon,2013-11-21
+BLSE105-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,,Tours,2012-10-01
+C92,cgMLST_ref_2018_v1_ecoli.gbk,131,,63000,Clermont Ferrand - Gabriel Montpied,2015-07-19
+BLSE2018-142,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,35000,Rennes - pontchaillou,2018-03-21
+BLSE108-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,37000,Tours,2012-10-01
+BLSE2018-159,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,42000,Saint-Etienne,2018-03-15
+BLSE2018-131,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,67000,Strasbourg,2018-03-12
+BLSE2018-3,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,63000,Clermont Ferrand - Gabriel Montpied,2018-03-03
+CNR2034,cgMLST_ref_2018_v1_ecoli.gbk,131,0.0,6606,Antibes - Juan Les Pins,2017-05-30
+FG49,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,97400,Reunion - Saint Denis - Felix Guyon,2013-12-01
+BLSE2018-30,cgMLST_ref_2018_v1_ecoli.gbk,131,0.0,94275,Le Kremlin Bicetre,2018-03-02
+C68,cgMLST_ref_2018_v1_ecoli.gbk,131,527.0,63000,Clermont Ferrand - Gabriel Montpied,2015-06-13
+PAP39,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,97159,Guadeloupe - Pointe a pitre,2014-01-06
+BLSE2018-86,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,45067,Orleans - la source,2018-04-03
+BLSE26-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,45067,Orleans - la source,2012-06-01
+BLSE130-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,92140,Clamart,2012-10-01
+BLSE97-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,21000,Dijon,2012-10-01
+NC11,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,98800,Institut Pasteur de Nouvelle-caledonie (IPNC),2013-10-08
+BLSE140-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,38043,Grenoble,2012-10-01
+CNR963,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,35310,Mordelles - ARCHIPEL BIO,2015-05-28
+FG5,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,97400,Reunion - Saint Denis - Felix Guyon,2013-10-10
+NC51,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,98800,Institut Pasteur de Nouvelle-caledonie (IPNC),2014-02-19
+PAP32,cgMLST_ref_2018_v1_ecoli.gbk,131,,97159,Guadeloupe - Pointe a pitre,2013-09-03
+PAP41,cgMLST_ref_2018_v1_ecoli.gbk,131,,XXXXX,Guadeloupe - Pointe a pitre,2013-12-20
+GHSR37,cgMLST_ref_2018_v1_ecoli.gbk,131,,97448,Reunion - Saint Pierre,2013-12-18
+CNR2885,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,6202,Nice - Archet 1,2018-10-22
+CNR1337,cgMLST_ref_2018_v1_ecoli.gbk,131,,31059,Toulouse - Purpan,2016-03-29
