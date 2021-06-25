@@ -59,8 +59,8 @@ python3 main.py -c path/to/metadata.csv -n path/to/newick.newick -m path/to/matr
 
 ## Results
 
-All result of Auract will appear in a second file result/.  
-INside it you will find auspice and microreact folder.  
+All result of Auract will appear in a folder name result/.  
+Inside it you will find auspice and microreact folder.  
 In microreact folder there will be a .tsv file open it and will have the name of your dataset and a microreact url just open it in your favorite webbrowser.
 
 And in Auspice folder you will find .json file drag and drop it at [auspice.us](https://auspice.us/) to see result. If you used a matrix you will also see a .html file which is the the table you can display in an webbrowser it will also be displayed in auspice if using my custom build.
