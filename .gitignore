@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # App
-/auract_venv/
-/result/
-/second_file/
+auract_venv/
+result/
+second_file/
 .log
