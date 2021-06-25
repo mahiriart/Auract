@@ -2,7 +2,7 @@
 
 ## About Auract
 
-**Auract** is an open-source project to help getting right input for [Microreact](https://microreact.org/showcase) and [Auspice](https://github.com/nextstrain/auspice) if you already have a newick and or metadata file.
+**Auract** is an open-source project to help getting right input for [Microreact](https://microreact.org/showcase) and [Auspice](https://github.com/nextstrain/auspice) if you already have a newick and or metadata file.  
 You can also add a distance matrix to improved the metadata. Note that i have also made a [custom Auspice build](https://github.com/Iry63/Auspice-custom-build) to display matrix which dynamically evolve with the tree state.
 
 
@@ -51,7 +51,7 @@ Basic command:
 python3 main.py -c path/to/metadata.csv -n path/to/newick.newick
 ```
 
-Add matrix:
+Add matrix:  
 Adding matrix will only give you a color filter base on minimum distance but if you plan on using my [custom Auspice build](https://github.com/Iry63/Auspice-custom-build) the matrix will also be display in Auspice.
 ```bash
 python3 main.py -c path/to/metadata.csv -n path/to/newick.newick -m path/to/matrix.csv
@@ -59,8 +59,8 @@ python3 main.py -c path/to/metadata.csv -n path/to/newick.newick -m path/to/matr
 
 ## Results
 
-All result of Auract will appear in a second file result/.
-INside it you will find auspice and microreact folder.
+All result of Auract will appear in a second file result/.  
+INside it you will find auspice and microreact folder.  
 In microreact folder there will be a .tsv file open it and will have the name of your dataset and a microreact url just open it in your favorite webbrowser.
 
 And in Auspice folder you will find .json file drag and drop it at [auspice.us](https://auspice.us/) to see result. If you used a matrix you will also see a .html file which is the the table you can display in an webbrowser it will also be displayed in auspice if using my custom build.
