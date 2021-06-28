@@ -3,7 +3,7 @@
 ## About Auract
 
 **Auract** is an open-source project to help getting right input for [Microreact](https://microreact.org/showcase) and [Auspice](https://github.com/nextstrain/auspice) if you already have a newick and or metadata file.  
-You can also add a distance matrix to improved the metadata. Note that i have also made a [custom Auspice build](https://github.com/Iry63/custom_auspice_build) to display matrix which dynamically evolve with the tree state.
+You can also add a distance matrix to improved the metadata. Note that i have also made a [custom Auspice build](https://github.com/Iry63/custom_auspice_build) to display the matrix which dynamically evolve with the tree state.
 
 
 ## Installation
