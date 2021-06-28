@@ -34,7 +34,7 @@ And for the metadata .csv and .tsv file are supported.
 Only an id or strain column is required note that specific column find in [microreact documentation](https://microreact.org/instructions) and [auspice documentation](https://docs.nextstrain.org/projects/augur/en/stable/faq/metadata.html) will also be aplied such as __autocolor prefix
 
 #### Geocoding
-Auract also include a geocoding features based on zip-code to use it all you need to do is add zip-code column in your metadata file and Auract will try to find a corresponding latitude and longitude. For more information on the current used database in folder data/geodata/readme.txt
+Auract also include a geocoding features based on zip-code to use it all you need to do is add zip-code column in your metadata file and Auract will try to find a corresponding latitude and longitude. For more information on the current used database, check the file data/geodata/readme.txt
 
 #### example
 You can see an example for each file in data/test/
@@ -63,6 +63,6 @@ All result of Auract will appear in a folder name result/.
 Inside it you will find auspice and microreact folder.  
 In microreact folder there will be a .tsv file open it and will have the name of your dataset and a microreact url just open it in your favorite webbrowser.
 
-And in Auspice folder you will find .json file drag and drop it at [auspice.us](https://auspice.us/) to see result. If you used a matrix you will also see a .html file which is the the table you can display in an webbrowser it will also be displayed in auspice if using my custom build.
+And in Auspice folder you will find a json file drag and drop it at [auspice.us](https://auspice.us/) to see result. If you used a matrix you will also see an html file which is the table for the matrix it will also be displayed in auspice if using my custom build.
 
 [![License GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
