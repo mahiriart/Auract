@@ -61,8 +61,8 @@ def newick_verif(arguments):
     except IOError as e:
         log(e)
         log("newick file not found", type='warning')
-        arguments.no_addlatlong = True
-        arguments.no_microreact = True
+        arguments.no_auspice = True
+        arguments.newick = False
     return arguments
 
 
@@ -104,6 +104,8 @@ def matrice_verif(arguments):
             z += 1
         log("Warning- Matrice index not equal to matrice column, arguments matrice set to None", type='warning')
         arguments.matrice = False
+        return arguments
+
     log('\t Matrice valid', type='debug')
     return arguments
 

@@ -3,19 +3,25 @@ This module contain function to add a color gradient based on matrix given
 """
 import pandas as pd
 
+
 def min_distance_value(matricepath):
     df = pd.read_csv(matricepath, sep="\t", index_col=0)
-    df_color = pd.DataFrame(columns=['id', 'min_value_compare_to_other', 'min_value_compare_to_other__colour'], index= None)
+    df_color = pd.DataFrame({'id': pd.Series([], dtype='int'),
+                       'min_value_compare_to_other': pd.Series([], dtype='int'),
+                       'min_value_compare_to_other__colour': pd.Series([], dtype='str')})
     dico = df.to_dict()
     for key, val in dico.items():
         min = None
         for key2, val2 in val.items():
             if not min:
                 min = val2
-            if key2 != key and val2 <= min:
+            if key2 != key and int(val2) <= int(min):
                 min = val2
-        df_color = df_color.append({'id': key, 'min_value_compare_to_other': str(min), 'min_value_compare_to_other__colour': hexvalue(min)}, ignore_index=True)
+        df_color = df_color.append(
+            {'id': int(key), 'min_value_compare_to_other': int(min), 'min_value_compare_to_other__colour': str(hexvalue(min))},
+            ignore_index=True)
     return df_color
+
 
 def hexvalue(min):
     if min <= 30:

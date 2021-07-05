@@ -12,7 +12,6 @@ from Bio import Phylo
 from matplotlib import cm
 
 
-
 class Auspice(dataset.Dataset):
     def __init__(self, csv_path, newick_path, no_latlong, matrice, jinja):
         super().__init__(csv_path, newick_path, no_latlong, matrice)
