@@ -54,7 +54,7 @@ python3 main.py -c path/to/metadata.csv -n path/to/newick.newick
 Add matrix:  
 Adding matrix will only give you a color filter base on minimum distance but if you plan on using my [custom Auspice build](https://github.com/Iry63/custom_auspice_build) the matrix will also be display in Auspice.
 ```bash
-python3 main.py -c path/to/metadata.csv -n path/to/newick.newick -m path/to/matrix.csv
+python3 main.py -c path/to/metadata.csv -n path/to/newick.newick -m path/to/matrix.tsv
 ```
 
 ## Results
