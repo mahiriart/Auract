@@ -2,7 +2,6 @@
 This module contain function to add a color gradient based on matrix given
 """
 import pandas as pd
-import time
 
 def min_distance_value(matricepath):
     df = pd.read_csv(matricepath, sep="\t", index_col=0)
