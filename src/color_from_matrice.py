@@ -17,7 +17,7 @@ def min_distance_value(matricepath):
             if str(key2) != str(key) and int(val2) <= int(min):
                 min = val2
         df_color = df_color.append(
-            {'id': int(key), 'min_value_compare_to_other': int(min), 'min_value_compare_to_other__colour': str(hexvalue(min))},
+            {'id': key, 'min_value_compare_to_other': int(min), 'min_value_compare_to_other__colour': str(hexvalue(min))},
             ignore_index=True)
     return df_color
 
