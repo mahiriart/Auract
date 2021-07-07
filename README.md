@@ -44,6 +44,19 @@ You can see an example for each file in data/test/
 For help on input:
 ```bash
 python3 main.py -h
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CSV, --csv CSV     path to csv file
+  -n NEWICK, --newick NEWICK
+                        path to newick file needed for auspice
+  -m MATRICE, --matrice MATRICE
+                        path to matrice csv or tsv file
+  --no_microreact       if call cancel microreact process
+  --no_auspice          if call cancel auspice process
+  -nll, --no_addlatlong
+                        if call cancel latlong process
+  --no_clearfile        if call cancel secondfile clear
 ```
 
 Basic command:
