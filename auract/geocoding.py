@@ -1,9 +1,10 @@
 """This module contain geocoding function to find latitude and longitude base on a zip-code. Local data-bank in
 /Geocoding/geodata/allclean.csv """
 import re
+import os
 import pandas as pd
-from src.log import log
-from settings import *
+from .log import log
+from .settings import data_dir, geo_csv_ll_dir
 
 df_geo = pd.read_csv(os.path.join(data_dir, 'geodata/allclean.csv'))
 

@@ -1,18 +1,21 @@
 """
 This module contain the subclass Auspice
 """
-import src.dataset as dataset
+import os
 import pandas as pd
 import subprocess
 import json
-from src.log import log, quit_with_error
-import src.color_from_matrice as matrice
-from settings import *
+
+from .dataset import Dataset
+from .log import log, quit_with_error
+from .color_from_matrice import min_distance_value
+from .settings import auspice_refine_dir, auspice_config_dir, result_Dir_auspice, data_dir, auspice_data_dir, second_file_dir
+
 from Bio import Phylo
 from matplotlib import cm
 
 
-class Auspice(dataset.Dataset):
+class Auspice(Dataset):
     def __init__(self, csv_path, newick_path, no_latlong, matrice, jinja):
         super().__init__(csv_path, newick_path, no_latlong, matrice)
         self.metadata = None
@@ -33,7 +36,7 @@ class Auspice(dataset.Dataset):
         if self.ll and self.basecsv:
             self.lat_long_gen()
 
-        log("Augur call:")
+        log("Augur call:", type='info')
         self.commandaugurrefine()
         if jinja and self.matrice:
             self.get_html_matrice()
@@ -84,9 +87,11 @@ class Auspice(dataset.Dataset):
         df_ll.to_csv(self.llconfig, index=False, header=None, sep='\t')
 
     def apply_matrice_color(self):
-        df_color = matrice.min_distance_value(self.matrice)
-
+        df_color = min_distance_value(self.matrice)
         df = pd.read_csv(self.metadata)
+        df = df.astype({"strain": str})
+        df_color = df_color.astype({"id": str})
+
         df = df.set_index('strain').join(df_color.set_index('id'))
         df.reset_index(inplace=True)
         df = df.drop(columns=['min_value_compare_to_other__colour'])
@@ -126,7 +131,7 @@ class Auspice(dataset.Dataset):
         viridis_r = cm.get_cmap('viridis_r', s)
 
         matrix = matrix.style.background_gradient(axis=None, cmap=viridis_r, text_color_threshold=0.3)
-        tablepath = os.path.join(result_Dir_auspice, self.name + '_table.html')
+        tablepath = os.path.join(second_file_dir, self.name + '_table.html')
         self.table = tablepath
         with open(self.table, "w") as mc:
             mc.write(str(matrix.render()))
@@ -140,13 +145,14 @@ class Auspice(dataset.Dataset):
         if self.metadata:
             argument.append('--metadata')
             argument.append(self.metadata)
-        with open(script_path + '/auspice_command_result.log', 'w+') as f:
+        with open(os.path.join(result_Dir_auspice, 'auspice_command_result.log'), 'w+') as f:
             command = " ".join(argument)
             try:
-                log()
-                log('\tRunning augur refine command can check output in ' + script_path + '/auspice_command_result.log',
+                log('\tRunning augur refine command can check output in ' + result_Dir_auspice + '/auspice_command_result.log',
                     type='info')
                 subprocess.run(command, stdout=f, stderr=subprocess.STDOUT, shell=True)
+                log('\tAugur refine ended', type='info')
+                log()
             except OSError as error:
                 log(error, type='debug')
                 log("Error- augur command export failed check log file for more information", type='error')
@@ -167,14 +173,14 @@ class Auspice(dataset.Dataset):
         if self.colorconfig:
             argument.append('--colors')
             argument.append(self.colorconfig)
-        with open(script_path + '/auspice_command_result.log', 'a+') as f:
+        with open(os.path.join(result_Dir_auspice, 'auspice_command_result.log'), 'a+') as f:
             command = " ".join(argument)
             try:
-                log()
-                log('\tRunning augur export command can check output in ' + os.path.join(script_path,
-                                                                                         'auspice_command_result.log'),
+                log('\tRunning augur export command can check output in '+ result_Dir_auspice + '/auspice_command_result.log',
                     type='info')
                 subprocess.run(command, stdout=f, stderr=subprocess.STDOUT, shell=True)
+                log('\tAugur export ended', type='info')
+                log()
             except OSError as error:
                 log(error, type='debug')
                 log("Error- augur command export failed check log file for more information", type='error')

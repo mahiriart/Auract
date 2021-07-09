@@ -4,22 +4,23 @@ This module contain the subclass Microreact
 
 import json
 import pandas as pd
-import src.dataset as dataset
-import src.color_from_matrice as matrice
-from src.log import log
-from settings import *
+from .dataset import Dataset
+from .color_from_matrice import min_distance_value
+from .log import log
+from .settings import result_Dir_micro, micro_json_dir
 import subprocess
 import os
 import csv
 import datetime
 
 
-class Microreact(dataset.Dataset):
+class Microreact(Dataset):
     def __init__(self, csv_path, newick_path, no_latlong, matrice):
         log()
         super().__init__(csv_path, newick_path, no_latlong, matrice)
         self.microreactlink = None
         self.jsonfile = None
+        self.resultdir = result_Dir_micro
         self.check_column()
         if self.matrice:
             self.apply_matrice_color()
@@ -29,9 +30,9 @@ class Microreact(dataset.Dataset):
         log()
 
     def store_result(self):
-        if not os.path.exists(result_Dir_micro):
-            os.makedirs(result_Dir_micro)
-        file = os.path.join(result_Dir_micro, "results.tsv")
+        if not os.path.exists(self.resultdir):
+            os.makedirs(self.resultdir)
+        file = os.path.join(self.resultdir, "results.tsv")
         file_exist = os.path.isfile(file)
         fieldname = ['name',  'link', 'csv', 'newick', 'matrice', 'll', 'date']
         with open(file, 'a+') as results:
@@ -40,12 +41,16 @@ class Microreact(dataset.Dataset):
                 log("creating results.csv that store metadata of the request", type='info')
                 writer.writeheader()
             writer.writerow({'name': self.name, 'csv': self.basecsv, 'newick': self.newick, 'll': self.ll, 'date': datetime.datetime.now(), 'link': self.microreactlink, 'matrice': self.matrice})
-            log("adding new result from the request to results.csv", type='info')
+            log("adding new result from the request to results.tsv", type='info')
 
     def apply_matrice_color(self):
         df = pd.read_csv(self.csvadapte)
-        df_color = matrice.min_distance_value(self.matrice)
+        df = df.astype({"id": str})
+        df_color = min_distance_value(self.matrice)
+        df_color = df_color.astype({"id": str})
+
         df = df.set_index('id').join(df_color.set_index('id'))
+
         df.reset_index(inplace=True)
         df.to_csv(self.csvadapte, index=False)
 

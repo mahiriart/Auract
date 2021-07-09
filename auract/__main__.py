@@ -5,16 +5,19 @@ import codecs
 import shutil
 import csv
 import os
+import sys
 import pandas as pd
-import src.microreact as micro
-import src.auspice as auspice
-from src.log import log, quit_with_error
-from settings import second_file_dir
+
+from .microreact import Microreact
+from .auspice import Auspice
+from .log import log, quit_with_error
+from .settings import second_file_dir
+
 import importlib.util
+import time
 
 package_augur = 'augur'
 package_jinja2 = 'jinja2'
-
 
 def csv_verif(arguments):
     try:
@@ -105,6 +108,15 @@ def matrice_verif(arguments):
         log("Warning- Matrice index not equal to matrice column, arguments matrice set to None", type='warning')
         arguments.matrice = False
         return arguments
+    dico = df.to_dict()
+    for key, val in dico.items():
+        for key2, val2 in val.items():
+            try:
+                float(val2)
+            except ValueError:
+                log('matrice contain value that are not number : '+val2, type='warning')
+                arguments.matrice = None
+                return arguments
 
     log('\t Matrice valid', type='debug')
     return arguments
@@ -145,7 +157,7 @@ def verification_args(arguments):
 def argsparser():
     # Argument parsing
     parser = argparse.ArgumentParser(
-        prog='main.py',
+        prog='__main__.py',
         description="A toolkit to creat microreact and auspice output from csv and newick can also add a matrix that "
                     "will be display in auspice if using custom auspice build "
     )
@@ -157,18 +169,22 @@ def argsparser():
     parser.add_argument("-nll", "--no_addlatlong", action='store_true', help='if call cancel latlong process')
     parser.add_argument("--no_clearfile", action='store_true', help='if call cancel secondfile clear ')
 
+    if len(sys.argv) == 1:
+        parser.print_help()
+        parser.exit()
+
     args = parser.parse_args()
     args = verification_args(args)
     return args
 
 
 def version():
-    return "version 1.0"
+    return "Auract - version 1.0"
 
 
 def main():
-    logging.basicConfig(filename='log.log', filemode="w", level=logging.DEBUG,
-                        format='%(levelname)s - %(asctime)s - %(message)s', )
+    logging.basicConfig(filename='../log.log', filemode="w", level=logging.DEBUG,
+                        format='%(levelname)s - %(asctime)s - %(message)s')
     log(version(), type='info')
     log()
     args = argsparser()
@@ -177,7 +193,7 @@ def main():
         log('-----------------------------------')
         log('microreact call', type='info')
         log()
-        micro.Microreact(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
+        Microreact(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
                          matrice=args.matrice)
 
     augur = importlib.util.find_spec(package_augur)
@@ -192,7 +208,7 @@ def main():
             log('-----------------------------------')
             log('auspice call', type='info')
             log()
-            auspice.Auspice(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
+            Auspice(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
                             matrice=args.matrice, jinja=jinja)
 
     if not args.no_clearfile:
@@ -205,5 +221,9 @@ def main():
 
 
 if __name__ == "__main__":
+    start_time = time.time()
     main()
     log('end', type='debug')
+    g_time = time.time() - start_time
+    log('Time '+str(g_time)+' second', type='info')
+

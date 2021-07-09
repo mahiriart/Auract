@@ -4,8 +4,8 @@ This module contain the class Dataset super class
 
 import os
 import shutil
-from settings import *
-from src.geocoding import geocoding
+from .settings import second_file_dir
+from .geocoding import geocoding
 
 
 class Dataset:
