@@ -130,6 +130,7 @@ dmypy.json
 
 # App
 auract_venv/
-result/
+auract_result/
 second_file/
 .log
+.idea
