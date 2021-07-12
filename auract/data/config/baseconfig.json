@@ -3,6 +3,13 @@
   "maintainers": [
     {"name": "a good guy"}
   ],
+  "colorings": [
+    {
+      "key": "min_value_compare_to_other",
+      "title": "min distance to other",
+      "type": "categorical"
+    }
+  ],
   "geo_resolutions": [
     "zip-code"
   ],
