@@ -16,14 +16,18 @@ from matplotlib import cm
 
 
 class Auspice(Dataset):
-    def __init__(self, csv_path, newick_path, no_latlong, matrice, jinja):
+    def __init__(self, csv_path, newick_path, no_latlong, matrice, jinja, output):
         super().__init__(csv_path, newick_path, no_latlong, matrice)
         self.metadata = None
         self.llconfig = None
         self.colorconfig = None
         self.table = None
         self.table_html = None
-        self.lastresultjson = os.path.join(result_Dir_auspice, self.name + '.json')
+        if output:
+            self.resultdir = os.path.join(output, 'auspice')
+        else:
+            self.resultdir = result_Dir_auspice
+        self.lastresultjson = os.path.join(self.resultdir, self.name + '.json')
         self.refinertree = os.path.join(auspice_refine_dir, self.name + '_tree.nwk')
         self.refinernode = os.path.join(auspice_refine_dir, self.name + '_node_data.nwk')
         self.config = os.path.join(data_dir, 'config/baseconfig.json')
@@ -112,8 +116,8 @@ class Auspice(Dataset):
         df_color.to_csv(self.colorconfig, index=False, sep="\t", header=None)
 
     def get_html_matrice(self):
-        if not os.path.exists(result_Dir_auspice):
-            os.makedirs(result_Dir_auspice)
+        if not os.path.exists(self.resultdir):
+            os.makedirs(self.resultdir)
         matrix = pd.read_csv(self.matrice, sep="\t", index_col=0)
 
         tree = Phylo.read(self.refinertree, 'newick')
@@ -145,10 +149,12 @@ class Auspice(Dataset):
         if self.metadata:
             argument.append('--metadata')
             argument.append(self.metadata)
-        with open(os.path.join(result_Dir_auspice, 'auspice_command_result.log'), 'w+') as f:
+        if not os.path.exists(self.resultdir):
+            os.makedirs(self.resultdir)
+        with open(os.path.join(self.resultdir, 'auspice_command_result.log'), 'w+') as f:
             command = " ".join(argument)
             try:
-                log('\tRunning augur refine command can check output in ' + result_Dir_auspice + '/auspice_command_result.log',
+                log('\tRunning augur refine command can check output in ' + self.resultdir + '/auspice_command_result.log',
                     type='info')
                 subprocess.run(command, stdout=f, stderr=subprocess.STDOUT, shell=True)
                 log('\tAugur refine ended', type='info')
@@ -160,8 +166,8 @@ class Auspice(Dataset):
                 log(ie, type='error')
 
     def commandaugurexport(self):
-        if not os.path.exists(result_Dir_auspice):
-            os.makedirs(result_Dir_auspice)
+        if not os.path.exists(self.resultdir):
+            os.makedirs(self.resultdir)
         argument = ['augur export v2', '-t', self.refinertree, '--node-data', self.refinernode, '--output',
                     self.lastresultjson, '--auspice-config', self.config]
         if self.metadata:
@@ -173,10 +179,10 @@ class Auspice(Dataset):
         if self.colorconfig:
             argument.append('--colors')
             argument.append(self.colorconfig)
-        with open(os.path.join(result_Dir_auspice, 'auspice_command_result.log'), 'a+') as f:
+        with open(os.path.join(self.resultdir, 'auspice_command_result.log'), 'a+') as f:
             command = " ".join(argument)
             try:
-                log('\tRunning augur export command can check output in '+ result_Dir_auspice + '/auspice_command_result.log',
+                log('\tRunning augur export command can check output in '+ self.resultdir + '/auspice_command_result.log',
                     type='info')
                 subprocess.run(command, stdout=f, stderr=subprocess.STDOUT, shell=True)
                 log('\tAugur export ended', type='info')

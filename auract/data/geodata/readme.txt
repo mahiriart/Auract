@@ -1,6 +1,6 @@
-All data comes from www.geonames.org
+All data comes from www.geonames.org and laposte.fr
 
-Own data:
+Use own data:
 To use your own geocoding database:
     use a csv file with this header: lat,long,zip-code
        and replace allclean.csv
@@ -9,12 +9,14 @@ Add data:
 If you want to add more data to the current database open allclean.csv and add it at the end of the file with the same column order.
 
 Where to get data:
-    I recommend using data from www.geonames.org i had a 95% correspondence with 500zip-code from france.
+    I recommend using data from www.geonames.org i had a 95% correspondence with 500 test zip-code from france.
 
     Quick example:
-    download .txt file you want convert it to csv and extract the 3needed column :'zip-code' 'latitude' and 'longitude' with pandas dataframe
+    Download the .txt file you want at www.geonames.org, convert it to csv and extract the 3needed column :'zip-code' 'latitude' and 'longitude' with pandas dataframe
 
-    Here a function example to get 'zip-code' 'latitude' and 'longitude' from .csv note that you need to find the column first and adapt 'usecols=[]'' because it might change between each .txt file:
+    Here a function example to extract this 'zip-code' 'latitude' and 'longitude' column from .csv.
+    Important, first you will need to find each column index and adapt 'usecols=[x, y, z]'' because it might change between each .txt file.
+    Here an example for the RE.txt file:
         # reunion
         def re_clean():
             df_geo_re = pd.read_csv('./data/csv/re.csv', delimiter="\t",
@@ -23,16 +25,19 @@ Where to get data:
             df_geo_re.to_csv('./data/clean/reclean.csv', index=False)
 
 
-allclean.csv info:
-current database used:
-    FR
-    RE
-    MQ
-    GP
-    NC
-    YT
-    laposte.fr //a lots redundant data with other but allows me to get a bit more correspondence
+    Then add the new csv data at the end of allclean.csv
 
-line manually added:
-lat,long,zip-code
--22.26667,166.46667, 98800.0
+
+allclean.csv info:
+    current file used:
+        FR
+        RE
+        MQ
+        GP
+        NC
+        YT
+        laposte.fr //a lots of redundant data with other but allows me to get a better result
+
+    line manually added:
+    lat,long,zip-code
+    -22.26667,166.46667, 98800.0

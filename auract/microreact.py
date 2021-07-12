@@ -15,12 +15,16 @@ import datetime
 
 
 class Microreact(Dataset):
-    def __init__(self, csv_path, newick_path, no_latlong, matrice):
+    def __init__(self, csv_path, newick_path, no_latlong, matrice, output):
         log()
         super().__init__(csv_path, newick_path, no_latlong, matrice)
         self.microreactlink = None
         self.jsonfile = None
-        self.resultdir = result_Dir_micro
+        if output:
+            self.resultdir = os.path.join(output, 'microreact')
+        else:
+            self.resultdir = result_Dir_micro
+        print(self.resultdir)
         self.check_column()
         if self.matrice:
             self.apply_matrice_color()

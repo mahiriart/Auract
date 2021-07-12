@@ -11,13 +11,13 @@ import pandas as pd
 from .microreact import Microreact
 from .auspice import Auspice
 from .log import log, quit_with_error
-from .settings import second_file_dir
 
 import importlib.util
 import time
 
 package_augur = 'augur'
 package_jinja2 = 'jinja2'
+
 
 def csv_verif(arguments):
     try:
@@ -125,6 +125,11 @@ def matrice_verif(arguments):
 # test argument passed
 def verification_args(arguments):
     log("Verifying arguments", type='info')
+    if arguments.output:
+        if not os.path.exists(arguments.output):
+            log('output path not find', type='info')
+            arguments.output = None
+            
     # csv
     if arguments.csv:
         arguments = csv_verif(arguments)
@@ -157,8 +162,8 @@ def verification_args(arguments):
 def argsparser():
     # Argument parsing
     parser = argparse.ArgumentParser(
-        prog='__main__.py',
-        description="A toolkit to creat microreact and auspice output from csv and newick can also add a matrix that "
+        prog='auract',
+        description="A toolkit to create microreact and auspice output from csv and newick can also add a matrix that "
                     "will be display in auspice if using custom auspice build "
     )
     parser.add_argument('-c', '--csv', help="path to csv file")
@@ -168,6 +173,7 @@ def argsparser():
     parser.add_argument("--no_auspice", action='store_true', help='if call cancel auspice process')
     parser.add_argument("-nll", "--no_addlatlong", action='store_true', help='if call cancel latlong process')
     parser.add_argument("--no_clearfile", action='store_true', help='if call cancel secondfile clear ')
+    parser.add_argument("--output", help="path for Auract output files")
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -179,11 +185,11 @@ def argsparser():
 
 
 def version():
-    return "Auract - version 1.0"
+    return "Auract - version 0.9"
 
 
 def main():
-    logging.basicConfig(filename='../log.log', filemode="w", level=logging.DEBUG,
+    logging.basicConfig(filename='log.log', filemode="w", level=logging.DEBUG,
                         format='%(levelname)s - %(asctime)s - %(message)s')
     log(version(), type='info')
     log()
@@ -194,7 +200,7 @@ def main():
         log('microreact call', type='info')
         log()
         Microreact(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
-                         matrice=args.matrice)
+                         matrice=args.matrice, output=args.output)
 
     augur = importlib.util.find_spec(package_augur)
     jinja = importlib.util.find_spec(package_jinja2)
@@ -209,15 +215,16 @@ def main():
             log('auspice call', type='info')
             log()
             Auspice(csv_path=args.csv, newick_path=args.newick, no_latlong=args.no_addlatlong,
-                            matrice=args.matrice, jinja=jinja)
+                            matrice=args.matrice, jinja=jinja, output=args.output)
 
     if not args.no_clearfile:
+        from .settings import second_file_dir
         if not os.path.exists(second_file_dir):
             pass
         else:
-            log("Second file folder remove", type='info')
             log()
             shutil.rmtree(second_file_dir)
+            log("Second file folder remove", type='info')
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-strains,genomes,MLST-1,MLST-2,ZIP code,Location,date
+id,genomes,MLST-1,MLST-2,ZIP code,Location,date
 FG47,cgMLST_ref_2018_v1_ecoli.gbk,131,506.0,97400,Reunion - Saint Denis - Felix Guyon,2013-11-21
 BLSE105-2012,cgMLST_ref_2018_v1_ecoli.gbk,131,43.0,,Tours,2012-10-01
 C92,cgMLST_ref_2018_v1_ecoli.gbk,131,,63000,Clermont Ferrand - Gabriel Montpied,2015-07-19

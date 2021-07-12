@@ -4,16 +4,7 @@
     {"name": "a good guy"}
   ],
   "colorings": [
-    {
-      "key": "zip-code",
-      "title": "zip-code",
-      "type": "categorical"
-    },
-    {
-      "key": "min_value_compare_to_other",
-      "title": "distance to other",
-      "type": "categorical"
-    }
+
   ],
   "geo_resolutions": [
     "zip-code"
