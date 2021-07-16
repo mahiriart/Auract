@@ -102,6 +102,6 @@ auract -c data_test/metadata.csv \
 	-nll \
 	--no_microreact
 ``` 
-This command for example will give result at path_to/auract/result/ , plus will not clear second file in auract folder so will see every file created during Auract process. There will be no latitude and longitude so no map. And microreact result will not be creat you will only have the .json file for Auspice. 
+This command for example will give result at path_to/auract/result/ , plus will not clear second file in auract folder so will see every file created during Auract process. There will be no geocoding. And microreact result will not be created you will only have the .json file for Auspice. 
 
 [![License GPL v3](https://img.shields.io/badge/license-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
