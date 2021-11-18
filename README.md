@@ -17,24 +17,34 @@ But for more information on the input used see below.
   
 ## Installation  
   
-Create a virtual environment(recommended)  
+**Create a virtual environment(recommended)** 
 ```bash  
 python3 -m venv auract_venv/
 source auract_venv/bin/activate
 ```  
   
-Clone the repository  
+**Clone the repository**
 ```bash  
 git clone https://github.com/Iry63/Auract.git
 cd Auract
 pip3 install .
 ```
 
-Test
+**Test**
 ```
 auract -h
 ```
-  
+**Microreact Token:**
+
+If you plan on using microreact make sure to first have an account and an access token that you can find [here](https://microreact.org/my-account/settings).
+
+Then in file [auract/settings.py](https://github.com/Iry63/Auract/blob/master/auract/settings.py)
+add your access token to variable microToken.
+
+Should looks like this :
+```
+microToken = "eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjYxOGE2ZTBlM2Q1ZGVkMDAxMTYyNWY1OCIsImlhdCI6MTYzNzI2MDg3MiwiZXhwIjoxNzk0OTQwODcyfQ.Aefvncj1jORnnZ-YhVLmqnq3g_hM4Wa_HS63Qj3gr6FbPNaSAeSHuCBQ9hStnDy3uR"
+```
 ## Input  
   
 #### Newick  

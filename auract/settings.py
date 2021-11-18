@@ -1,5 +1,8 @@
 import os
 
+#microreact access token
+microToken = ""
+
 #base path
 script_path = os.path.dirname(os.path.abspath(__file__))
 cwd_path = os.getcwd()

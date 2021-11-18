@@ -7,7 +7,7 @@ import pandas as pd
 from .dataset import Dataset
 from .color_from_matrice import min_distance_value
 from .log import log
-from .settings import result_Dir_micro, micro_json_dir
+from .settings import result_Dir_micro, micro_json_dir, microToken
 import subprocess
 import os
 import csv
@@ -105,7 +105,7 @@ class Microreact(Dataset):
         try:
             log()
             result = subprocess.check_output(
-                ' curl --header "Content-type: application/json; charset=UTF-8" --request POST --data @'+self.jsonfile+' https://demo.microreact.org/api/schema/convert |  curl --header "Content-type: application/json; charset=UTF-8" --header "Access-Token: eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjYxOTIzNWYzMmM2NjkxMDAxMjk0ODZiYSIsImlhdCI6MTYzNzAyNDkzMiwiZXhwIjoxNzk0NzA0OTMyfQ.hoTBQ1IJ_vPWs0JbDHfu7DMBpowtmehFk2nYr5w65FgU1lA2aVN0LiGbUhoB4jHKsSEat5eCCEBrWZXD136K9g" --data @- https://demo.microreact.org/api/projects/create', shell=True)
+                ' curl --header "Content-type: application/json; charset=UTF-8" --request POST --data @'+self.jsonfile+' https://demo.microreact.org/api/schema/convert |  curl --header "Content-type: application/json; charset=UTF-8" --header "Access-Token: '+microToken+'" --data @- https://demo.microreact.org/api/projects/create', shell=True)
             api_result = json.loads(result)
             log('Microreact link : ' + api_result['url'])
             log()
